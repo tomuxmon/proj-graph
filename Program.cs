@@ -17,10 +17,6 @@ internal class Program
             || pathSln is null
             || !Path.Exists(pathSln))
         {
-            // C:\Users\tomasdambrauskas\sc\windows-app\NordVPN.sln      
-
-            //pathSln = "C:\\Users\\tomasdambrauskas\\sc\\nord-communication-ipc\\NordSec.Communication.Ipc.sln";
-            //pathSln = "C:\\Users\\tomasdambrauskas\\sc\\windows-app\\NordVPN.sln";
             Console.Error.WriteLine("Must specify solution path like 'proj-graph path-sln:some.awsome.sln' ");
             return;
         }
@@ -28,8 +24,6 @@ internal class Program
         if (!argsNamed.TryGetValue("path-diagram", out string? pathDiagram)
             || pathDiagram is null)
         {
-            //pathDiagram = "C:\\Users\\tomasdambrauskas\\sc\\nord-communication-ipc\\diagram.html";
-            //pathDiagram = "C:\\Users\\tomasdambrauskas\\sc\\windows-app\\diagram.html";
             Console.Error.WriteLine("Must specify diagram path 'proj-graph path-diagram:diagram.html' ");
             return;
         }
@@ -77,7 +71,7 @@ internal class Program
             nodes,
             links);
 
-        string result = flowchart.CalculateFlowchart();
+        string mermaidChart = flowchart.CalculateFlowchart();
 
         var sb = new StringBuilder();
         sb.Append("<h2>");
@@ -88,7 +82,7 @@ internal class Program
             Project references:
             <pre class="mermaid">
         """);
-        sb.Append(result);
+        sb.Append(mermaidChart);
         sb.Append("""
             </pre>
             <script type="module">
